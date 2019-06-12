@@ -9,7 +9,7 @@ import javax.persistence.FetchType
 
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 class Order
 {
     @Id
