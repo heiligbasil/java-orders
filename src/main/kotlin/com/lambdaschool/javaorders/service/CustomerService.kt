@@ -11,7 +11,7 @@ interface CustomerService
 
     fun delete(customercode: Long)
 
-    fun save(customer: Customer): Customer
-
     fun update(customer: Customer, id: Long): Customer
+
+    fun save(customer: Customer): Customer
 }

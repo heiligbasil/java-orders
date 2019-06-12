@@ -34,24 +34,12 @@ class CustomerServiceImplementation : CustomerService
         throw EntityNotFoundException("Customer $customername not found!")
     }
 
-    @Transactional
-    override fun save(customer: Customer): Customer
+    override fun delete(customercode: Long)
     {
-        val newCustomer = Customer(
-                customer.customername,
-                customer.customercity,
-                customer.workingarea,
-                customer.customercountry,
-                customer.grade,
-                customer.openingamount,
-                customer.receiveamount,
-                customer.paymentamount,
-                customer.outstandingamount,
-                customer.phone,
-                customer.agentcode
-        )
+        val currentCustomer = custrepos.findById(customercode)
+                .orElseThrow { EntityNotFoundException(customercode.toString()) }
 
-        return custrepos.save(newCustomer)
+        custrepos.deleteById(customercode)
     }
 
     override fun update(customer: Customer, id: Long): Customer
@@ -78,12 +66,24 @@ class CustomerServiceImplementation : CustomerService
         return custrepos.save(currentCustomer)
     }
 
-    override fun delete(customercode: Long)
+    @Transactional
+    override fun save(customer: Customer): Customer
     {
-        val currentCustomer = custrepos.findById(customercode)
-                .orElseThrow { EntityNotFoundException(customercode.toString()) }
+        val newCustomer = Customer(
+                customer.customername,
+                customer.customercity,
+                customer.workingarea,
+                customer.customercountry,
+                customer.grade,
+                customer.openingamount,
+                customer.receiveamount,
+                customer.paymentamount,
+                customer.outstandingamount,
+                customer.phone,
+                customer.agentcode
+        )
 
-        custrepos.deleteById(customercode)
+        return custrepos.save(newCustomer)
     }
 }
 
