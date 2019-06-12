@@ -7,7 +7,6 @@ import javax.persistence.JoinColumn
 import javax.persistence.FetchType
 
 
-
 @Entity
 @Table(name = "orders")
 class Order
