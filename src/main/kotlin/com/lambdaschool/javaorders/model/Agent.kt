@@ -6,7 +6,7 @@ import javax.persistence.*
 import java.util.ArrayList
 
 @Entity
-@Table(name = "agent")
+@Table(name = "agents")
 class Agent
 {
     @Id
@@ -20,14 +20,14 @@ class Agent
     var country: String? = null
 
     @OneToMany(mappedBy = "agent", cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JsonIgnore
-    val customers: List<Customer> = listOf<Customer>()
+    @JsonIgnoreProperties(value = ["agents"])
+    val customers: MutableList<Customer>? = mutableListOf()
 
     @OneToMany(mappedBy = "agent", cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JsonIgnore
-    val orders = ArrayList<Order>()
+    @JsonIgnoreProperties(value = ["agents"])
+    val orders:MutableList<Order>? = mutableListOf()
 
-    constructor()
+    constructor() {}
 
     constructor(agentname: String?, workingarea: String?, commission: Double, phone: String?, country: String?)
     {

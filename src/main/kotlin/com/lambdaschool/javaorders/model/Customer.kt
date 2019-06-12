@@ -5,10 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 import java.util.ArrayList
 
-
-
 @Entity
-@Table(name = "customer")
+@Table(name = "customers")
 class Customer
 {
     @Id
@@ -30,14 +28,14 @@ class Customer
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agentcode", nullable = false)
-    @JsonIgnore
+    @JsonIgnoreProperties(value = ["customers", "hibernateLazyInitializer"])
     var agentcode: Agent? = null
 
     @OneToMany(mappedBy = "customer", cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JsonIgnore
-    val orders = ArrayList<Order>()
+    @JsonIgnoreProperties(value = ["customers"])
+    val orders:MutableList<Order> = mutableListOf()
 
-    constructor()
+    constructor() {}
 
     constructor(customername: String?, customercity: String?, workingarea: String?, customercountry: String?, grade: String?, openingamount: Double, receiveamount: Double, paymentamount: Double, outstandingamount: Double, phone: String?, agentcode: Agent?)
     {

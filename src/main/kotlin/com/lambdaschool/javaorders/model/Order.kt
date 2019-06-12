@@ -30,7 +30,7 @@ class Order
 
     var orderdescription: String? = null
 
-    constructor()
+    constructor() {}
 
     constructor(orderamount: Double, advanceamount: Double, customer: Customer?, agent: Agent?, orderdescription: String?)
     {
