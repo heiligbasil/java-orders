@@ -29,7 +29,7 @@ class Customer
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agentcode", nullable = false)
     @JsonIgnoreProperties(value = ["customers", "hibernateLazyInitializer"])
-    var agentcode: Agent? = null
+    var agent: Agent? = null
 
     @OneToMany(mappedBy = "customer", cascade = [CascadeType.ALL], orphanRemoval = true)
     @JsonIgnoreProperties(value = ["customers"])
@@ -37,7 +37,7 @@ class Customer
 
     constructor() {}
 
-    constructor(customername: String?, customercity: String?, workingarea: String?, customercountry: String?, grade: String?, openingamount: Double, receiveamount: Double, paymentamount: Double, outstandingamount: Double, phone: String?, agentcode: Agent?)
+    constructor(customername: String?, customercity: String?, workingarea: String?, customercountry: String?, grade: String?, openingamount: Double, receiveamount: Double, paymentamount: Double, outstandingamount: Double, phone: String?, agent: Agent?)
     {
         this.customername = customername
         this.customercity = customercity
@@ -49,6 +49,6 @@ class Customer
         this.paymentamount = paymentamount
         this.outstandingamount = outstandingamount
         this.phone = phone
-        this.agentcode = agentcode
+        this.agent = agent
     }
 }

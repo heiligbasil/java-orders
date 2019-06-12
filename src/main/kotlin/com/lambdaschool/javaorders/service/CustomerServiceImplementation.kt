@@ -56,7 +56,7 @@ class CustomerServiceImplementation : CustomerService
         currentCustomer.receiveamount = customer.receiveamount
         currentCustomer.outstandingamount = customer.outstandingamount
         customer.phone.let { currentCustomer.phone = customer.phone }
-        customer.agentcode.let { currentCustomer.agentcode = customer.agentcode }
+        customer.agent.let { currentCustomer.agent = customer.agent }
 
         for (order: Order in customer.orders)
         {
@@ -80,7 +80,7 @@ class CustomerServiceImplementation : CustomerService
                 customer.paymentamount,
                 customer.outstandingamount,
                 customer.phone,
-                customer.agentcode
+                customer.agent
         )
 
         return custrepos.save(newCustomer)
